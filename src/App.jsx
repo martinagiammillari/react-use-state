@@ -14,9 +14,10 @@ import './App.css'
 import languages from "./assets/languages"
 
 
+
 export default function TextChanger() {
-
-
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const language = languages[selectedIndex];
 
   return (
     <>
@@ -26,22 +27,27 @@ export default function TextChanger() {
         </div>
       </header>
 
-
       <main>
-        <button className="btn btn-warning mx-4">Warning</button>
-        <button className="btn btn-primary">Primary</button>
-
+        {languages.map((lang, index) => (
+          <button
+            key={index}
+            onClick={() => setSelectedIndex(index)}
+            className={index === selectedIndex ? "btn btn-warning mx-4" : "btn btn-primary mx-4"}
+          >
+            {lang.title}
+          </button>
+        ))}
 
         <div className="card my-4">
           <div className="card-body">
-            This is some text within a card body.
+            <h5 className="card-title">{language.title}</h5>
+            <p className="card-text">{language.description}</p>
           </div>
         </div>
       </main>
-
-
     </>
-    )
+  );
 }
 
-export default App
+
+
